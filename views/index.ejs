@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="main-box">
+        <h1>Welcome to Task Manager</h1>
+        <form action="/form-submit" method="post" class="task-form">
+            <input type="text" name="task" class="task-inp" placeholder="Enter your task" required>
+            <br>
+            <button type="submit" class="submit-task">Submit Task</button>
+        </form>
+        <button class="v-task">View Task</button>
+    </div>
+
+    <div class="sec-box">
+        <div class="head-back">
+            <i class="fa-solid fa-backward back-btn"></i>
+            <h1 class="hd">
+                Tasks
+            </h1>
+        </div>
+        <ul>
+            <% if (tasks.length > 0) { %>
+                <% tasks.forEach(task => { %>
+                    <li>
+                        <%= task.task %>
+                        <form action="/delete-task" method="post" style="display: inline;">
+                            <input type="hidden" name="taskid" value="<%=task._id %>">
+                            <button type="submit" class="del-btn"><i class="fa-solid fa-trash"></i> </button>
+                        </form>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <li>No tasks found.</li>
+            <% } %>
+        </ul>
+        
+    </div>
+    <script src="https://kit.fontawesome.com/788fbf9df0.js" crossorigin="anonymous"></script>
+    <script src="./funct.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "zvB7xYaBOlAII0L0a",
+      });
+   })();
+</script>
+</body>
+</html>
